@@ -1,0 +1,36 @@
+{
+  "name": "Leetcode Notebook Custom Print",
+  "version": "1.0",
+  "description": "Print Leetcode note of your choice",
+  "permissions": [
+    "declarativeContent",
+    "tabs",
+    "activeTab",
+    "*://leetcode.com/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://leetcode.com/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "content.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}
