@@ -17,5 +17,10 @@ label {
     font-weight: 700;
 }
 
-
+/* a box wrapping around the notes */
+div.note-content {
+    display: inline-block;
+    border: 1px solid #000;
+    text-align: left;
+}
 

@@ -1,4 +1,3 @@
-
 (async () => {
     const tabs = await browser.tabs.query({active: true, currentWindow: true});
     const whole_html = await browser.tabs.sendMessage(tabs[0].id, {type: 'getHTML'});
@@ -6,14 +5,43 @@
     let dummy = document.getElementById("show_description") //add the html after "intro"
     dummy.outerHTML += whole_html
 
-    // clear legacy header
-    // let el = document.getElementsByClassName("callout callout-info")
-    // for (let i = 0; i < el.length; i++) {
-    //     el[i].innerHTML = ""
-    // }
-    $("div.callout.callout-info").remove()
     $('.h2').remove()
 
+
+    ////////// construct the question list /////////
+    let questions = document.createElement("div")
+    questions.setAttribute("id", "question-list")
+
+    let els = document.getElementsByClassName("panel-title")
+    for (let i = 0; i < els.length; i++) {
+        let el = document.createElement("p")
+        el.innerText = els[i].innerText
+        questions.appendChild(el)
+    }
+
+    let reference = document.querySelectorAll('.callout,.callout-info')[0]
+    console.log(reference)
+    reference.parentNode.insertBefore(questions, reference.nextSibling);
+    $("div.callout.callout-info").remove()
+    /////////////////////////////////////////////////////
+
+    // listener for checkbox to show question description
+    document.querySelector("input[name=showDescription]").addEventListener('change', function () {
+        let els = document.getElementsByClassName("question-description")
+        if (this.checked) {
+            console.log("Checkbox is checked..");
+            for (let i = 0; i < els.length; i++) {
+                els[i].style.display = "block";
+            }
+        } else {
+            console.log("Checkbox is not checked..");
+            for (let i = 0; i < els.length; i++) {
+                els[i].style.display = "none";
+            }
+        }
+    });
+
+    //what
 
 
 })();
