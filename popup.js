@@ -7,7 +7,6 @@
 
     $('.h2').remove()
 
-
     ////////// construct the question list /////////
     let questions = document.createElement("div")
     questions.setAttribute("id", "question-list")
@@ -25,6 +24,8 @@
     $("div.callout.callout-info").remove()
     /////////////////////////////////////////////////////
 
+
+
     // listener for checkbox to show question description
     document.querySelector("input[name=showDescription]").addEventListener('change', function () {
         let els = document.getElementsByClassName("question-description")
@@ -41,7 +42,35 @@
         }
     });
 
-    //what
+    // link to print
+    document.querySelector("input[name=showDescription]").addEventListener('change', function () {
+        let els = document.getElementsByClassName("question-description")
+        if (this.checked) {
+            console.log("Checkbox is checked..");
+            for (let i = 0; i < els.length; i++) {
+                els[i].style.display = "block";
+            }
+        } else {
+            console.log("Checkbox is not checked..");
+            for (let i = 0; i < els.length; i++) {
+                els[i].style.display = "none";
+            }
+        }
+    });
+
+    document.getElementById("print").addEventListener('click', function() {
+        var mywindow = window.open('', '', 'height=500, width=500');
+        let questions = document.querySelectorAll('.panel,.panel-default')
+        console.log(questions)
+        for (let i = 0; i < questions.length; i++) {
+            mywindow.document.write(questions[i].innerHTML);
+        }
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10*/
+        mywindow.print();
+        mywindow.close();
+    });
+
 
 
 })();
