@@ -25,7 +25,6 @@
     /////////////////////////////////////////////////////
 
 
-
     // listener for checkbox to show question description
     document.querySelector("input[name=showDescription]").addEventListener('change', function () {
         let els = document.getElementsByClassName("question-description")
@@ -42,28 +41,28 @@
         }
     });
 
-    // link to print
-    document.querySelector("input[name=showDescription]").addEventListener('change', function () {
-        let els = document.getElementsByClassName("question-description")
-        if (this.checked) {
-            console.log("Checkbox is checked..");
-            for (let i = 0; i < els.length; i++) {
-                els[i].style.display = "block";
-            }
-        } else {
-            console.log("Checkbox is not checked..");
-            for (let i = 0; i < els.length; i++) {
-                els[i].style.display = "none";
-            }
-        }
-    });
+    // let parent = document.getElementById("collapse_42").parentElement
+    // parent.setAttribute("style", "background-color:rgba(137, 196, 244, 0.3)")
 
-    document.getElementById("print").addEventListener('click', function() {
-        var mywindow = window.open('', '', 'height=500, width=500');
+    let titles = document.querySelectorAll('.panel-title')
+    for (let i = 0; i < titles.length; i++) {
+        let checkbox = document.createElement("input")
+        checkbox.setAttribute("type", "checkbox")
+        titles[i].appendChild(checkbox)
+        addListener(checkbox)
+    }
+
+
+    // print
+    document.getElementById("print").addEventListener('click', function () {
+        var mywindow = window.open('', '', 'height=1000, width=1000');
+
+        //only print questions highlighted with BLUE (i.e. selected by user)
         let questions = document.querySelectorAll('.panel,.panel-default')
-        console.log(questions)
         for (let i = 0; i < questions.length; i++) {
-            mywindow.document.write(questions[i].innerHTML);
+            if (questions[i].style.backgroundColor == "rgba(137, 196, 244, 0.3)") {
+                mywindow.document.write(questions[i].innerHTML);
+            }
         }
         mywindow.document.close(); // necessary for IE >= 10
         mywindow.focus(); // necessary for IE >= 10*/
@@ -72,8 +71,19 @@
     });
 
 
-
 })();
+
+function addListener(chk) {
+    chk.addEventListener('change', function () {
+            if (this.checked) {
+                chk.parentElement.parentElement.parentElement.style.backgroundColor = "rgba(137, 196, 244, 0.3)";
+
+            } else {
+                chk.parentElement.parentElement.parentElement.style.backgroundColor = "rgba(255,255,255,0)";
+            }
+        }
+    )
+}
 
 
 // (async () => {
