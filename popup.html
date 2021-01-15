@@ -2,25 +2,28 @@
 <html>
 <head>
     <script type="application/javascript" src="browser-polyfill.js"></script>
+    <script src=autocomplete.js></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="autocomplete.css">
     <script src="popup.js"></script>
+
+    <div id="intro">
+        <p> Note: This extension only works at https://leetcode.com/notes/. Happy Leetcoding and good luck!
+        <p/>
+        <button class="blue" id = "print">Print</button>
+        <div id="show_description">
+            <label>Show Question Description:<input type="checkbox" name="showDescription"></label>
+        </div>
+        <input id="search" type="text" placeholder="Search your question here..."/>
+
+    </div>
+
+
 </head>
 
 <body>
-<div id="intro">
-    <p>This is an extension to print notes of questions of your choice at https://leetcode.com/notes/. If you don't see your notes, please refresh and
-        click the icon again.
-    <p/>
-</div>
-
-<h1>My Notes</h1>
-<a id = "print" href = #>Print</a>
-<div id="show_description">
-    <label>Show Description:<input type="checkbox" name="showDescription"></label>
-
-</div>
-
+<h1 id="my_note">My Notes</h1>
 
 
 </body>
