@@ -34,14 +34,15 @@
 
         checkbox.addEventListener('change', function () {
                 let relative_box = document.querySelector(`input[class=${titles[i].parentElement.id}]`)
-
+                let select_all_box = document.querySelector("input[name=selectAll]")
                 if (this.checked) {
                     relative_box.checked = true
-                    relative_box.dispatchEvent(new Event('change'))
+                    // relative_box.dispatchEvent(new Event('change'))
                     checkbox.parentElement.parentElement.parentElement.style.backgroundColor = "rgba(137, 196, 244, 0.3)";
                 } else {
                     relative_box.checked = false
-                    relative_box.dispatchEvent(new Event('change'))
+                    select_all_box.checked = false
+                    // relative_box.dispatchEvent(new Event('change'))
                     checkbox.parentElement.parentElement.parentElement.style.backgroundColor = "transparent";
 
                 }
@@ -139,6 +140,23 @@
     });
     //////////////////end - construct candidates for the search box /////////////////////////
 
+    //// scroll to top button //////
+    let mybutton = document.getElementById("myBtn");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    };
+
+    mybutton.addEventListener('click', function () {
+        $('html, body').animate({
+                scrollTop: 0
+            },
+            'slow');
+    })
+    /////// end-button /////////
 
     //////////// print ////////////////////////
     document.getElementById("print").addEventListener('click', function () {

@@ -9,11 +9,21 @@
     <script src="popup.js"></script>
 
     <div id="intro">
-        <p> Note: This extension only works at https://leetcode.com/notes/. Happy Leetcoding and good luck!
+        <p> Note: This extension only works at <a href="https://leetcode.com/notes/" target="_blank">https://leetcode.com/notes/</a>.
+            Happy Leetcoding and good luck!
+
+        <form action="https://www.paypal.com/donate" method="post" target="_blank">
+            <input type="hidden" name="business" value="VS3MRAP7PLDLG"/>
+            <input type="hidden" name="currency_code" value="USD"/>
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0"
+                   name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button"/>
+            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+        </form>
+
         <p/>
         <button class="blue" id="print">Print</button>
 
-        <ul class = "two-column">
+        <ul class="two-column">
             <li>
                 <label>Show Question Description<input type="checkbox" name="showDescription"></label>
             </li>
@@ -33,6 +43,7 @@
 <body>
 <h1 id="my_note">My Notes</h1>
 
+<button id="myBtn" title="Go to top">Top</button>
 
 </body>
 </html>
