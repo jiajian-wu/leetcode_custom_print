@@ -7,9 +7,55 @@
 
     $('.h2').remove()
 
-    ////////// construct the question list /////////
+
+    //// listener for checkbox to show question description ///
+    document.querySelector("input[name=showDescription]").addEventListener('change', function () {
+        let els = document.getElementsByClassName("question-description")
+        if (this.checked) {
+            for (let i = 0; i < els.length; i++) {
+                els[i].style.display = "block";
+            }
+        } else {
+            for (let i = 0; i < els.length; i++) {
+                els[i].style.display = "none";
+            }
+        }
+    });
+    //// end - listener for checkbox to show question description ///
+
+
+    //////// construct check boxes in main body and add listener //////////
+    let titles = document.querySelectorAll('.panel-title')
+    for (let i = 0; i < titles.length; i++) {
+        let checkbox = document.createElement("input")
+        checkbox.setAttribute("type", "checkbox")
+        checkbox.setAttribute("name", titles[i].parentElement.id)
+        titles[i].appendChild(checkbox)
+
+        checkbox.addEventListener('change', function () {
+                let relative_box = document.querySelector(`input[class=${titles[i].parentElement.id}]`)
+
+                if (this.checked) {
+                    relative_box.checked = true
+                    relative_box.dispatchEvent(new Event('change'))
+                    checkbox.parentElement.parentElement.parentElement.style.backgroundColor = "rgba(137, 196, 244, 0.3)";
+                } else {
+                    relative_box.checked = false
+                    relative_box.dispatchEvent(new Event('change'))
+                    checkbox.parentElement.parentElement.parentElement.style.backgroundColor = "transparent";
+
+                }
+            }
+        )
+
+    }
+    ///////////////end - construct check box for each question and add listener///////////////
+
+
+    ////////// construct the question list atop/////////
     let questions = document.createElement("ul")
     questions.setAttribute("id", "question-list")
+    questions.setAttribute("class", "two-column")
 
     let els = document.getElementsByClassName("panel-title")
     for (let i = 0; i < els.length; i++) {
@@ -17,6 +63,22 @@
 
         let small_box = document.createElement("input")
         small_box.setAttribute("type", "checkbox")
+        let title_id = els[i].parentElement.id
+        small_box.setAttribute("class", title_id)
+        small_box.addEventListener('change', function () {
+            let relative_box = document.querySelector(`input[name=${title_id}]`)
+            let select_all_box = document.querySelector("input[name=selectAll]")
+
+            if (this.checked) {
+                relative_box.checked = true
+                relative_box.dispatchEvent(new Event('change'))
+            } else {
+                relative_box.checked = false
+                relative_box.dispatchEvent(new Event('change'))
+                select_all_box.checked = false
+
+            }
+        })
 
         let p = document.createElement("label")
         p.innerText = els[i].innerText
@@ -28,39 +90,27 @@
     }
 
     let reference = document.querySelectorAll('.callout,.callout-info')[0]
-    console.log(reference)
     reference.parentNode.insertBefore(questions, reference.nextSibling);
     $("div.callout.callout-info").remove()
     /////////////////end - construct the question list///////////////
 
 
-    //// listener for checkbox to show question description ///
-    document.querySelector("input[name=showDescription]").addEventListener('change', function () {
-        let els = document.getElementsByClassName("question-description")
+    ///// Select All check box //////
+    //// name: head_42 class: head_42 ///
+    let boxes = $("#question-list :input")
+    document.querySelector("input[name=selectAll]").addEventListener('change', function () {
         if (this.checked) {
-            console.log("Checkbox is checked..");
-            for (let i = 0; i < els.length; i++) {
-                els[i].style.display = "block";
-            }
+            boxes.each(function () {
+                this.checked = true
+                this.dispatchEvent(new Event("change"))
+            });
         } else {
-            console.log("Checkbox is not checked..");
-            for (let i = 0; i < els.length; i++) {
-                els[i].style.display = "none";
-            }
+            boxes.each(function () {
+                this.checked = false
+                this.dispatchEvent(new Event("change"))
+            });
         }
     });
-    //// end - listener for checkbox to show question description ///
-
-
-    //////// construct check box for each question and add listener //////////
-    let titles = document.querySelectorAll('.panel-title')
-    for (let i = 0; i < titles.length; i++) {
-        let checkbox = document.createElement("input")
-        checkbox.setAttribute("type", "checkbox")
-        titles[i].appendChild(checkbox)
-        addListener(checkbox)
-    }
-    ///////////////end - construct check box for each question and add listener///////////////
 
 
     //////// construct candidates for the search box //////////
