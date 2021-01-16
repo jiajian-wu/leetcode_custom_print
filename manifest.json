@@ -1,11 +1,10 @@
 {
-  "name": "Leetcode Notebook Custom Print",
+  "name": "LeetCode Notebook Customized Print",
   "version": "1.0",
-  "description": "Print Leetcode note of your choice",
+  "description": "Print selective LeetCode note of your choice, instead of printing all the notes by default",
   "permissions": [
     "declarativeContent",
     "tabs",
-    "activeTab",
     "*://leetcode.com/"
   ],
   "background": {
